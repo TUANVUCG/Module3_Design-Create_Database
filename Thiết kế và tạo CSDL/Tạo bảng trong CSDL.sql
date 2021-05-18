@@ -1,0 +1,62 @@
+CREATE DATABASE QuanLyDiemThi;
+
+USE QuanLyDiemThi;
+
+CREATE TABLE Student(
+StudentID INT PRIMARY KEY, 
+StudentName	VARCHAR(50),
+DateOfBirth VARCHAR(15),
+ClassName VARCHAR(50),
+Gender VARCHAR (5)); 
+
+CREATE DATABASE Subject;
+
+USE Subject;
+
+CREATE TABLE Subject(
+SubID VARCHAR(50)  PRIMARY KEY,
+SubName VARCHAR(50),
+TeacherID INT);
+
+CREATE DATABASE Mark;
+
+USE Mark;
+
+USE QuanLyDiemThi;
+
+CREATE TABLE SUBJECT(
+SubID VARCHAR(50) PRIMARY KEY,
+SubName VARCHAR(50),
+TeacherID INT);
+
+CREATE TABLE MarkBoard(
+StudentID INT,
+SubID VARCHAR(50),
+Mark DOUBLE,
+TestDate DATE,
+PRIMARY KEY (StudentID, SubID));
+
+CREATE TABLE Teacher(
+TeacherID INT PRIMARY KEY,
+TeacherName VARCHAR(30),
+PhoneNumber VARCHAR(11));
+
+DROP TABLE MarkBoard;
+
+CREATE TABLE MarkBoard(
+StudentID INT,
+SubID VARCHAR(50),
+Mark DOUBLE,
+TestDate DATE,
+PRIMARY KEY(StudentID, SubID));
+
+
+ALTER TABLE MarkBoard
+ADD FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
+ADD FOREIGN KEY (SubID) REFERENCES Subject(SubID);
+
+ALTER TABLE Subject 
+ADD TeacherID VARCHAR(20);
+
+ALTER TABLE Subject
+ADD CONSTRAINT FK_TeacherID FOREIGN KEY (TeacherID) REFERENCES Teacher(TeacherID);
